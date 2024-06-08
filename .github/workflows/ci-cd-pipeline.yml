@@ -27,11 +27,15 @@ jobs:
       - name: Build
         run: go build ./...
 
-      - name: Run tests
+      
+    test:
+      needs: build
+      runs-on: ubuntu-latest
+       steps:
+       - name: Run tests
         run: go test ./...
-
   deploy:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
