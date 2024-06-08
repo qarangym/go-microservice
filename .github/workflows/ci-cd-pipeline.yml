@@ -28,11 +28,19 @@ jobs:
         run: go build ./...
 
       
-    test:
-      needs: build
-      runs-on: ubuntu-latest
-       steps:
-       - name: Run tests
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '^1.18'  # Ensure you are using a compatible Go version
+      - name: Run tests
         run: go test ./...
   deploy:
     needs: test
