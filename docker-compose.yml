@@ -1,12 +1,20 @@
 version: '3.7'
 
 services:
-  frontend:
-    image: frontend:latest
-    ports:
-      - "3000:3000"
-  api:
-    image: api:latest
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    
+      - "50051:50051"
+    environment:
+      - PORT=8080
+      - GRPC_PORT=50051
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
