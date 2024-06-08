@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+
+package proto;
+option go_package = "./proto";
+service ItemService {
+    rpc GetItem (GetItemRequest) returns (GetItemResponse);
+    rpc ListItems (ListItemsRequest) returns (ListItemsResponse);
+    rpc CreateItem (CreateItemRequest) returns (CreateItemResponse);
+    rpc UpdateItem (UpdateItemRequest) returns (UpdateItemResponse);
+    rpc DeleteItem (DeleteItemRequest) returns (DeleteItemResponse);
+}
+
+message GetItemRequest {
+    string id = 1;
+}
+
+message GetItemResponse {
+    Item item = 1;
+}
+
+message ListItemsRequest {}
+
+message ListItemsResponse {
+    repeated Item items = 1;
+}
+
+message CreateItemRequest {
+    Item item = 1;
+}
+
+message CreateItemResponse {}
+
+message UpdateItemRequest {
+    string id = 1;
+    Item item = 2;
+}
+
+message UpdateItemResponse {}
+
+message DeleteItemRequest {
+    string id = 1;
+}
+
+message DeleteItemResponse {}
+
+message Item {
+    string id = 1;
+    string name = 2;
+    int32 price = 3;
+}
